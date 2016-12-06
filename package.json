@@ -17,10 +17,8 @@
     ]
   },
   "scripts": {
-    // ADDED
     "getVersion": "node -e console.log(require('./package.json').version)",
     "dumpVersion": "node -e console.log(require('./package.json').version) > version.txt",
-    // END ADDED
     "postinstall": "install-app-deps",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
