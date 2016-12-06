@@ -3,9 +3,9 @@
   "productName": "Electron Boilerplate",
   "description": "Starter for your Electron application",
   "version": "0.0.0",
-  "author": "Mr. Gumby <mr.gumby@example.com>",
+  "author": "Nate BW <thepooe@gmail.com>",
   "copyright": "© 2016, Gumby inc.",
-  "homepage": "http://example.com",
+  "homepage": "https://github.com/ThePooE/jenkins_electron",
   "license": "MIT",
   "main": "app/background.js",
   "build": {
