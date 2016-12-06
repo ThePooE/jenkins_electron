@@ -4,7 +4,7 @@
   "description": "Starter for your Electron application",
   "version": "0.0.0",
   "author": "Nate BW <thepooe@gmail.com>",
-  "copyright": "© 2016, Gumby inc.",
+  "copyright": "© 2016, Everybody Inc",
   "homepage": "https://github.com/ThePooE/jenkins_electron",
   "license": "MIT",
   "main": "app/background.js",
