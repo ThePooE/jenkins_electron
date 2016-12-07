@@ -9,7 +9,7 @@ gulp.task('version', function () {
     let pkg = (JSON.parse(fs.readFileSync('./package.json')));
     let version = pkg.version;
 
-    fs.writeFile(versionFile, version, (err) => {
+    fs.writeFile(versionFile, "version="+version, (err) => {
         if (err) throw err;
     });
 });
