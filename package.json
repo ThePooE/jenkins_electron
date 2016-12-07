@@ -18,7 +18,8 @@
   },
   "scripts": {
     "getVersion": "node -e console.log(require('./package.json').version)",
-    "dumpVersion": "node -e console.log($VERSION=require('./package.json').version) > version.txt",
+    "dumpVersion": "node -e console.log(\"VERSION=\" + require('./package.json').version) > version.txt",
+    "version": "gulp version",
     "postinstall": "install-app-deps",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
@@ -40,6 +41,7 @@
     "electron-mocha": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-batch": "^1.0.5",
+    "gulp-file": "^0.3.0",
     "gulp-less": "^3.0.3",
     "gulp-plumber": "^1.1.0",
     "gulp-util": "^3.0.6",
