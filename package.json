@@ -2,7 +2,7 @@
   "name": "my-electron-boilerplate",
   "productName": "Electron Boilerplate",
   "description": "Starter for your Electron application",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Nate BW <thepooe@gmail.com>",
   "copyright": "© 2016, Everybody Inc",
   "homepage": "https://github.com/ThePooE/jenkins_electron",
