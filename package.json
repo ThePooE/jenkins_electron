@@ -17,8 +17,8 @@
     ]
   },
   "scripts": {
-    "dumpVersion": "node -e console.log(`version=`+(JSON.parse(fs.readFileSync('./package.json'))).version) > version.txt",
     "version": "gulp version",
+    "dumpVersion": "node -e console.log(`version=`+(JSON.parse(fs.readFileSync('./package.json'))).version) > version.txt",
     "postinstall": "install-app-deps",
     "build": "gulp build",
     "prerelease": "gulp build --env=production",
