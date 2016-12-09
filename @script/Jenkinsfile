@@ -1,21 +1,24 @@
 #!groovy
 node {
     /** Downloading Stage */
-    stage 'Download'
+    stage "Download"
     checkout scm
     echo 'Yay!'
+
     /** Setting-up Stage */
-    stage 'Setup'
+    stage "Setup"
     bat 'npm run package-properties'
     echo "${env.BUILD_ID}"
-    bat 'npm uninstall *'
+    bat "npm uninstall *"
     echo 'INFO: Directory Cleaned!'
+
     /** Building Stage */
-    state 'Build'
-    bat 'npm install'
+    state "Build"
+    bat "npm install"
     echo 'INFO: Build Completed!'
+
     /** Testing Stage */
-    state 'Test'
+    state "Test"
     bat 'npn run e2e'
     echo 'Test #1 Completed'
     bat 'npn run coverage'
