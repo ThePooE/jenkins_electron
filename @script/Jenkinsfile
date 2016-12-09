@@ -9,8 +9,10 @@ node {
         echo "${env.BUILD_ID}"
         bat 'npm uninstall *'
         echo 'INFO: Directory Cleaned!'
+    }
+    state ('Build') {
         bat 'npm install'
-        echo 'INFO: Setup Completed!'
+        echo 'INFO: Build Completed!'
     }
     state ('Test') {
         bat 'npn run e2e'
