@@ -3,6 +3,7 @@ node {
     /** Downloading Stage */
     stage 'Download'
     checkout scm
+    def mvnHome = tool 'M3'
     echo 'Yay!'
 
     /** Setting-up Stage */
@@ -27,5 +28,7 @@ node {
     /** Packaging Stage */
     stage 'Package'
     bat 'npm run packWin'
-    echo 'Test #3 Completed'
+    echo 'Packaging Completed'
+    deleteDir()
+    echo 'Directory cleaned'
 }
