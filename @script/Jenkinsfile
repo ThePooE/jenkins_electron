@@ -1,27 +1,22 @@
 #!groovy
-node ('Pre-build'){
-    stage ('Download') {
-        checkout scm
-        echo 'Yay!'
-    }
-    stage ('Setup') {
-        bat 'npm run package-properties'
-        echo "${env.BUILD_ID}"
-        bat 'npm uninstall *'
-        echo 'INFO: Directory Cleaned!'
-    }
-}
-node ('Main') {
-    state ('Build') {
-        bat 'npm install'
-        echo 'INFO: Build Completed!'
-    }
-    state ('Test') {
-        bat 'npn run e2e'
-        echo 'Test #1 Completed'
-        bat 'npn run coverage'
-        echo 'Test #2 Completed'
-        bat 'npn run packWin'
-        echo 'Test #3 Completed'
+node {
+    stage 'Download'
+    checkout scm
+    echo 'Yay!'
+    stage 'Setup'
+    bat 'npm run package-properties'
+    echo "${env.BUILD_ID}"
+    bat 'npm uninstall *'
+    echo 'INFO: Directory Cleaned!'
+    state 'Build'
+    bat 'npm install'
+    echo 'INFO: Build Completed!'
+    state 'Test'
+    bat 'npn run e2e'
+    echo 'Test #1 Completed'
+    bat 'npn run coverage'
+    echo 'Test #2 Completed'
+    bat 'npn run packWin'
+    echo 'Test #3 Completed'
     }
 }
