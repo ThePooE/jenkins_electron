@@ -9,14 +9,16 @@ node {
     stage "Setup"
     bat 'npm run package-properties'
     echo "${env.BUILD_ID}"
+    bat "npm uninstall *"
+    echo 'INFO: Directory Cleaned!'
 
     /** Building Stage */
-    state "Build"
+    stage "Build"
     bat "npm install"
     echo 'INFO: Build Completed!'
 
     /** Testing Stage */
-    state "Test"
+    stage "Test"
     bat 'npn run e2e'
     echo 'Test #1 Completed'
     bat 'npn run coverage'
