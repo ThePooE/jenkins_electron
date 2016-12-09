@@ -8,6 +8,7 @@ node {
         bat 'npm run package-properties'
         echo "${env.BUILD_ID}"
         bat 'npm install'
+        echo 'INFO: Setup Completed!'
     }
     state ('Test') {
         bat 'npn run e2e'
