@@ -1,8 +1,11 @@
 #!groovy
 node {
-    stage ('Downloading') {
+    stage ('Download') {
         checkout scm
         echo 'Yay!'
+    }
+    stage ('Setup') {
+        bat 'npm run package-properties'
         load "package-properties.txt"
     }
 }
