@@ -1,7 +1,7 @@
 #!groovy
 import hudson.model.*
 import hudson.EnvVars
-
+import groovy.json.JsonSlurperClassic
 import java.net.URL
 
 node {
