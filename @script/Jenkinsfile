@@ -13,6 +13,5 @@ node {
     stage ('Setup') {
         bat 'npm run package-properties'
         def properties = readFile("package-properties.txt")
-        echo properties
     }
 }
