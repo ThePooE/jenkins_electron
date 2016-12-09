@@ -5,13 +5,14 @@ node {
     stage 'Download'
     checkout scm
     def mvnHome = tool 'M3'
+    bat "${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify"
 
     /** Setting-up Stage */
     stage 'Setup'
     bat 'npm run package-properties'
     def file = readFile 'package-properties.txt'
     echo file
-    properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true, overrideBuildParameters: true], pipelineTriggers([])])
+    properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
     echo "${env.BUILD_ID}"
     env.JOB_NAME = "v${env.version} - ${env.platform}${env.BUILD_ID}"
     bat 'npm uninstall *'
