@@ -31,6 +31,4 @@ node {
     bat 'npm run packWin'
     archiveArtifacts artifacts: '**', onlyIfSuccessful: true
     deleteDir()
-    //properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true, overrideBuildParameters: true], pipelineTriggers([])])
-
 }

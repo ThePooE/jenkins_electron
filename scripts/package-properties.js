@@ -8,7 +8,7 @@ const propertiesPath = ``;
 const propertiesFile = `package-properties.txt`;
 let directory = propertiesPath + propertiesFile;
 /*****************************************************************************/
-const version = `version`+pkg.version;
+const version = `version=`+pkg.version;
 const newline = `\n`;
 const platform = `platform=`+pkg.platform;
 let output = version + newline + platform;
