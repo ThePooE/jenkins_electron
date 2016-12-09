@@ -1,34 +1,30 @@
 #!groovy
 node {
     /** Downloading Stage */
+    def job = Jenkins.instance.getItem("jenkin_groovy")
     stage 'Download'
     checkout scm
     def mvnHome = tool 'M3'
-    echo 'Yay!'
 
     /** Setting-up Stage */
     stage 'Setup'
     bat 'npm run package-properties'
+    def file = readFile 'package-properties.txt'
     echo "${env.BUILD_ID}"
     bat 'npm uninstall *'
-    echo 'INFO: Directory Cleaned!'
 
     /** Building Stage */
     stage 'Build'
     bat 'npm install'
-    echo 'INFO: Build Completed!'
 
     /** Testing Stage */
     stage 'Test'
     bat 'npm run e2e'
-    echo 'Test #1 Completed'
     bat 'npm run coverage'
-    echo 'Test #2 Completed'
 
     /** Packaging Stage */
     stage 'Package'
     bat 'npm run packWin'
-    echo 'Packaging Completed'
+    archiveArtifacts artifacts: '**', onlyIfSuccessful: true
     deleteDir()
-    echo 'Directory cleaned'
 }
