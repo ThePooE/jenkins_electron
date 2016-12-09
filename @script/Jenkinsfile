@@ -1,19 +1,12 @@
 #!groovy
-import hudson.model.*
-import hudson.EnvVars
-import groovy.json.JsonSlurperClassic
-import java.io.File
-import java.net.URL
-
 node {
-    def slurper = JsonSlurperClassic()
     stage ('Download') {
         checkout scm
         echo 'Yay!'
     }
     stage ('Setup') {
         bat 'npm run package-properties'
-        def properties = readFile("package-properties.txt")
-        echo properties
+        echo ${env.BUILD_ID}
+        bat 'npm install'
     }
 }
