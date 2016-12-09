@@ -1,5 +1,5 @@
 #!groovy
-node {
+node ('Pre-build'){
     stage ('Download') {
         checkout scm
         echo 'Yay!'
@@ -10,6 +10,8 @@ node {
         bat 'npm uninstall *'
         echo 'INFO: Directory Cleaned!'
     }
+}
+node ('Main') {
     state ('Build') {
         bat 'npm install'
         echo 'INFO: Build Completed!'
