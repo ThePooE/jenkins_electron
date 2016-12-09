@@ -13,8 +13,6 @@ node {
     stage ('Setup') {
         bat 'npm run package-properties'
         def properties = readFile("package-properties.txt")
-        withEnv(properties) {
-            echo properties
-        }
+        echo properties
     }
 }
