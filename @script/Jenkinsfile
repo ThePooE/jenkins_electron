@@ -9,7 +9,7 @@ node {
     /** Setting-up Stage */
     stage 'Setup'
     bat 'npm run package-properties'
-    def file = readFile("${env.WORKSPACE}package-properties.txt")
+    def file = readFile(${env.WORKSPACE} + "package-properties.txt")
     echo "${env.BUILD_ID}"
     bat 'npm uninstall *'
 
