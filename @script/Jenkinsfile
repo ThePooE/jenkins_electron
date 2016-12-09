@@ -7,6 +7,8 @@ node {
     stage ('Setup') {
         bat 'npm run package-properties'
         echo "${env.BUILD_ID}"
+        bat 'npm uninstall *'
+        echo 'INFO: Directory Cleaned!'
         bat 'npm install'
         echo 'INFO: Setup Completed!'
     }
