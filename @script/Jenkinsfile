@@ -12,7 +12,9 @@ node {
     }
     stage ('Setup') {
         bat 'npm run package-properties'
-        echo currentJob.getName()
-        echo properties
+        String properties = readFile("package-properties.txt")
+        withEnv(properties) {
+            echo properties
+        }
     }
 }
