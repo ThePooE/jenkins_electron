@@ -5,7 +5,7 @@ node {
     stage 'Download'
     checkout scm
     def mvnHome = tool 'M3'
-    bat "${mvnHome}\\bin\\mvn.exe -B -Dmaven.test.failure.ignore verify"
+    bat "mvn -B -Dmaven.test.failure.ignore verify"
 
     /** Setting-up Stage */
     stage 'Setup'
