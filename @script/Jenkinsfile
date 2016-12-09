@@ -1,23 +1,23 @@
 #!groovy
 import hudson.model.*
+import hudson.EnvVars
 import groovy.json.JsonSlurper
-import java.nio.file.Paths
-def parameters = build?.actions.find{ it instanceof ParametersAction }?.parameters
-parameters.each {
-   println "parameter ${it.name}:"
-   println it.dump()
-}
+import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
+import java.net.URL
+
 node {
-    def jsonSlourper = new JsonSlurper()
+    def slurper = new JsonSlurper()
     stage ('Download') {
         checkout scm
         echo 'Yay!'
     }
     stage ('Setup') {
         bat 'npm run package-properties'
-        def packageProperties
-        Paths.get('package.json').withReader { reader ->
-            packageProperties = slurper.parse(reader)
+        String properties = readFile("package-properties.txt")
+        withEnv(properties) {
+            echo currentJob.getName()
+            echo properties
         }
     }
 }

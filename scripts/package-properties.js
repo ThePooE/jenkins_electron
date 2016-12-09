@@ -8,10 +8,10 @@ const propertiesPath = ``;
 const propertiesFile = `package-properties.txt`;
 let directory = propertiesPath + propertiesFile;
 /*****************************************************************************/
-var jsonObject = {
-    "version": pkg.version,
-    "platform": pkg.pl
-}
+const version = `version`+pkg.version;
+const newline = `\n`;
+const platform = `platform=`+pkg.platform;
+let output = version + newline + platform;
 //console.log(output);
 /*****************************************************************************/
 fs.writeFile(directory, output, (err) => {
