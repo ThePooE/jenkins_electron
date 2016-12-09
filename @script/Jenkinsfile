@@ -6,6 +6,6 @@ node {
     }
     stage ('Setup') {
         bat 'npm run package-properties'
-        def package-properties = readFile "package-properties.txt"
+        package-properties = readFile "/package-properties.txt"
     }
 }
