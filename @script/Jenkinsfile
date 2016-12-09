@@ -6,7 +6,7 @@ node {
     }
     stage ('Setup') {
         bat 'npm run package-properties'
-        echo ${env.BUILD_ID}
+        echo '${env.BUILD_ID}'
         bat 'npm install'
     }
 }
