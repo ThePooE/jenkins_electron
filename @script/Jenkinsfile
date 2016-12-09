@@ -9,4 +9,9 @@ node {
         echo '${env.BUILD_ID}'
         bat 'npm install'
     }
+    state ('Test') {
+        bat 'npn run e2e'
+        bat 'npn run coverage'
+        bat 'npn run packWin'
+    }
 }
