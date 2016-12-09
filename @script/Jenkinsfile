@@ -19,10 +19,10 @@ node {
 
     /** Testing Stage */
     stage "Test"
-    bat 'npn run e2e'
+    bat 'npm run e2e'
     echo 'Test #1 Completed'
-    bat 'npn run coverage'
+    bat 'npm run coverage'
     echo 'Test #2 Completed'
-    bat 'npn run packWin'
+    bat 'npm run packWin'
     echo 'Test #3 Completed'
 }
