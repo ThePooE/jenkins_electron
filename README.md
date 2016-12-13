@@ -7,7 +7,6 @@ The main purpose of the repository was to create a Jenkins testing site on GitHu
 ![alt tag](pics/legacy1.png)
 ![alt tag](pics/legacy2.png)
 ![alt tag](pics/legacy3.png)
-![alt tag](pics/legacy4.png)
 
 # Jenkins Pipeline
 
