@@ -6,20 +6,17 @@ import hudson.model.*
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
-
 node {
     /** Downloading Stage */
-    //def job = Jenkins.instance.getItem("jenkin_groovy")
     stage 'Download'
     checkout scm
     def mvnHome = tool 'M3'
-    //bat "mvn -B -Dmaven.test.failure.ignore verify"
 
     /** Setting-up Stage */
     stage 'Setup'
     bat 'npm run package-properties'
     def file = readFile 'package-properties.json'
-    def json = jsonParse(file)
+    def json = jsonParse(file);
     echo file
     currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
     bat 'npm uninstall *'
