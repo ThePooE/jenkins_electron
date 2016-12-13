@@ -2,7 +2,7 @@
 
 The main purpose of the repository was to create a Jenkins testing site on GitHub.
 
-# Legacy Configurations
+# Jenkins Legacy Configurations
 
 ![alt tag](pics/legacy1.png)
 ![alt tag](pics/legacy2.png)
@@ -96,3 +96,8 @@ node {
 ```
 
 ### Example Jenkins Setup
+
+![alt tag](pics/pipeline1.png)
+![alt tag](pics/pipeline2.png)
+![alt tag](pics/pipeline3.png)
+![alt tag](pics/pipeline4.png)
