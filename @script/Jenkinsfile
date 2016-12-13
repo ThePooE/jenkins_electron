@@ -3,42 +3,53 @@ import groovy.json.*
 import hudson.model.*
 
 // Have to approve the JsonSlurperClassic signatue in Jenkins
-
 @NonCPS
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
+
 node {
     /** Downloading Stage */
-    stage 'Download'
-    checkout scm
-    def mvnHome = tool 'M3'
+    stage ('Download') {
+        checkout scm
+        def mvnHome = tool 'M3'
+    }
 
     /** Setting-up Stage */
-    stage 'Setup'
-    bat 'npm run package-properties'
-    def file = readFile 'package-properties.json'
-    def json = jsonParse(file);
-    echo file
-    currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
-    bat 'npm uninstall *'
+    stage ('Setup') {
+        bat 'npm run package-properties'
+        def file = readFile 'package-properties.json'
+        def json = jsonParse(file);
+        echo file
+        currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
+        bat 'npm uninstall *'
+    }
 
     /** Building Stage */
-    stage 'Build'
-    bat 'npm install'
+    stage ('Build') {
+        bat 'npm install'
+    }
+
+    /** Downstreaming Stage */
+    stage ('Downstream') {
+        bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
+        build job: 'jenkin_groovy_down'
+    }
 
     /** Testing Stage */
-    stage 'Downstream'
-    bat echo "DISPLAYNAME=${currentBuild.displayName} > build.properties"
-    build job: 'jenkin_groovy_down'
-
-    stage 'Test'
-    bat 'npm run e2e'
-    bat 'npm run coverage'
+    stage ('Test') {
+        bat 'npm run e2e'
+        bat 'npm run coverage'
+    }
 
     /** Packaging Stage */
-    stage 'Package'
-    bat 'npm run packWin'
-    archiveArtifacts artifacts: '**', onlyIfSuccessful: true
-    deleteDir()
+    stage ('Package') {
+        bat 'npm run packWin'
+    }
+
+    /** Post-build Stage */
+    stage ('Post-Build') {
+        archiveArtifacts artifacts: '**', onlyIfSuccessful: true
+        deleteDir()
+    }
 }
