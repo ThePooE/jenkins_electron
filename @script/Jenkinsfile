@@ -14,9 +14,9 @@ node {
     stage 'Setup'
     bat 'npm run package-properties'
     def file = readFile 'package-properties.json'
-    def json = new JsonSlurper().parseText(file);
+    def json = new JsonSlurperClassic().parseText(file);
     echo file
-    currentBuild.displayName = 'v' + json.version + json.platform + env.BUILD_ID
+    currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
     bat 'npm uninstall *'
 
     /** Building Stage */
