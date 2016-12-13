@@ -20,7 +20,6 @@ node {
         bat 'npm run package-properties'
         def file = readFile 'package-properties.json'
         def json = jsonParse(file);
-        echo file
         currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
         bat 'npm uninstall *'
     }
@@ -33,7 +32,9 @@ node {
     /** Downstreaming Stage */
     stage ('Downstream') {
         //bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
-        build job: 'jenkin_groovy_down', parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
+        build
+            job: 'Electron XPlatform Pipeline - Downstream',
+            parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
     }
 
     /** Testing Stage */
