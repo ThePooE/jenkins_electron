@@ -29,7 +29,8 @@ node {
 
     /** Testing Stage */
     stage 'Downstream'
-    build job: 'jenkin_groovy_down', displayName: "Downstream - ${currentBuild.displayName}", parameters: [[$class: 'StringParameterValue', name: 'BUILD_DISPLAY_NAME', value: "Downstream - ${currentBuild.displayName}"]]
+    bat echo DISPLAYNAME=$currentBuild.displayName > build.properties
+    build job: 'jenkin_groovy_down'
 
     stage 'Test'
     bat 'npm run e2e'
