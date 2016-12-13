@@ -32,8 +32,8 @@ node {
 
     /** Downstreaming Stage */
     stage ('Downstream') {
-        bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
-        build job: 'jenkin_groovy_down'
+        //bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
+        build job: 'jenkin_groovy_down', parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
     }
 
     /** Testing Stage */
