@@ -2,6 +2,8 @@
 import groovy.json.*
 import hudson.model.*
 
+// Have to approve the JsonSlurperClassic signatue in Jenkins
+
 @NonCPS
 def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
@@ -27,6 +29,8 @@ node {
 
     /** Testing Stage */
     stage 'Test'
+    build job: 'jenkin_groovy_down', parameters:
+        [[$class: 'StringParameterValue', name: 'MY_VAR', value: 'Hello world!', BUILD_DISPLAY_NAME: currentBuild.displayName]]
     bat 'npm run e2e'
     bat 'npm run coverage'
 
