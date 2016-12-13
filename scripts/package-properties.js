@@ -5,16 +5,20 @@ console.log(`INFO: Exporting package properties..`);
 let pkg = JSON.parse(fs.readFileSync('./package.json'));
 /*****************************************************************************/
 const propertiesPath = ``;
-const propertiesFile = `package-properties.txt`;
+const propertiesFile = `package-properties.json`;
 let directory = propertiesPath + propertiesFile;
 /*****************************************************************************/
-const version = `version=`+pkg.version;
-const newline = `\n`;
-const platform = `platform=`+pkg.platform;
-let output = version + newline + platform;
-//console.log(output);
+var obj = {};
+var outputJSON;
+var items = ['version', 'platform'];
+
+items.forEach(function(item) {
+    obj[item] = pkg[item];
+})
+
+outputJSON = JSON.stringify(obj);
 /*****************************************************************************/
-fs.writeFile(directory, output, (err) => {
+fs.writeFile(directory, outputJSON, (err) => {
     if (err) throw err;
 });
 /*****************************************************************************/
