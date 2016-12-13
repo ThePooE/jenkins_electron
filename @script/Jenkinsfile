@@ -28,9 +28,11 @@ node {
     bat 'npm install'
 
     /** Testing Stage */
-    stage 'Test'
+    stage 'Downstream'
     build job: 'jenkin_groovy_down', parameters:
-        [[$class: 'StringParameterValue', name: 'BUILD_DISPLAY_NAME', value: 'Downstream - ' + currentBuild.displayName]]
+        [[$class: 'StringParameterValue', name: 'Hello', value: "Downstream - ${currentBuild.displayName}"]]
+
+    stage 'Test'
     bat 'npm run e2e'
     bat 'npm run coverage'
 
