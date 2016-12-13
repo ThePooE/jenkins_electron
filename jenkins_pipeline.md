@@ -1,14 +1,3 @@
-# Electron Integration with Jenkins
-
-The main purpose of the repository was to create a Jenkins testing site on GitHub.
-
-# Legacy Configurations
-
-![alt tag](pics/legacy1.png)
-![alt tag](pics/legacy2.png)
-![alt tag](pics/legacy3.png)
-![alt tag](pics/legacy4.png)
-
 # Jenkins Pipeline
 
 There is a new CI method in Jenkins which has been promoted heavily. This method is called pipeline.
