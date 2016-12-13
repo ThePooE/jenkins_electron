@@ -1,5 +1,6 @@
 #!groovy
 import groovy.json.JsonSlurper
+import hudson.EnvVars
 node {
     /** Downloading Stage */
     //def job = Jenkins.instance.getItem("jenkin_groovy")
@@ -12,13 +13,13 @@ node {
     stage 'Setup'
     bat 'npm run package-properties'
     def file = readFile 'package-properties.txt'
-    def inputFile = File('package-properties.txt')
-    def InputJSON = JsonSlurper().parseText(inputFile)
-    inputJson.each {k, v ->
-        println k
-    }
+    //def inputFile = File('package-properties.txt')
+    //def InputJSON = JsonSlurper().parseText(inputFile)
+    //inputJson.each {k, v ->
+    //    println k
+    //}
     echo file
-    //properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
+    properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
     echo "${env.BUILD_ID}"
     currentBuild.displayName = 'v' + env.version + env.platform + env.BUILD_ID
     bat 'npm uninstall *'
