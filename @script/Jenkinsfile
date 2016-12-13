@@ -1,4 +1,5 @@
 #!groovy
+import groovy.json.JsonSlurper
 node {
     /** Downloading Stage */
     //def job = Jenkins.instance.getItem("jenkin_groovy")
@@ -11,10 +12,15 @@ node {
     stage 'Setup'
     bat 'npm run package-properties'
     def file = readFile 'package-properties.txt'
+    def inputFile = new File('package-properties.txt')
+    def InputJSON = new JsonSlurper().parseText(inputFile)
+    inputJson.each {k, v ->
+        println k
+    }
     echo file
-    properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
+    //properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
     echo "${env.BUILD_ID}"
-    currentBuild.displayName = 'v' + env.version +env.platform + env.BUILD_ID
+    currentBuild.displayName = 'v' + env.version + env.platform + env.BUILD_ID
     bat 'npm uninstall *'
 
     /** Building Stage */
