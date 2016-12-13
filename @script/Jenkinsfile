@@ -30,7 +30,7 @@ node {
     /** Testing Stage */
     stage 'Test'
     build job: 'jenkin_groovy_down', parameters:
-        [[$class: 'StringParameterValue', name: 'MY_VAR', value: 'Hello world!', BUILD_DISPLAY_NAME: currentBuild.displayName]]
+        [[$class: 'StringParameterValue', name: 'BUILD_DISPLAY_NAME', value: 'Downstream - ' + currentBuild.displayName]]
     bat 'npm run e2e'
     bat 'npm run coverage'
 
