@@ -16,8 +16,6 @@ node {
     def file = readFile 'package-properties.json'
     def json = new JsonSlurper().parseText(file);
     echo file
-    //properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
-    echo "${env.BUILD_ID}"
     currentBuild.displayName = 'v' + json.version + json.platform + env.BUILD_ID
     bat 'npm uninstall *'
 
