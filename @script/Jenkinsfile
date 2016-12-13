@@ -2,6 +2,11 @@
 import groovy.json.*
 import hudson.model.*
 
+@NonCPS
+def jsonParse(def json) {
+    new groovy.json.JsonSlurperClassic().parseText(json)
+}
+
 node {
     /** Downloading Stage */
     //def job = Jenkins.instance.getItem("jenkin_groovy")
@@ -14,7 +19,7 @@ node {
     stage 'Setup'
     bat 'npm run package-properties'
     def file = readFile 'package-properties.json'
-    def json = new JsonSlurperClassic().parseText(file);
+    def json = jsonParse(file)
     echo file
     currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
     bat 'npm uninstall *'
