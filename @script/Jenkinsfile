@@ -23,7 +23,7 @@ node {
     properties([[$class: 'EnvInjectJobProperty', info: [loadFilesFromMaster: false, propertiesFilePath: 'package-properties.txt'], keepBuildVariables: true, keepJenkinsSystemVariables: true, on: true], pipelineTriggers([])])
     echo "${env.BUILD_ID}"
     currentBuild.displayName = 'v' + env.version + env.platform + env.BUILD_ID
-    echo currentBuild.buildVariables
+    echo currentBuild.version
     bat 'npm uninstall *'
 
     /** Building Stage */
