@@ -29,7 +29,7 @@ node {
 
     /** Testing Stage */
     stage 'Downstream'
-    bat echo "DISPLAYNAME=${currentBuild.displayName} > build.properties
+    bat echo "DISPLAYNAME=${currentBuild.displayName} > build.properties"
     build job: 'jenkin_groovy_down'
 
     stage 'Test'
