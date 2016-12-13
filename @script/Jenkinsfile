@@ -33,7 +33,7 @@ node {
     stage ('Downstream') {
         //bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
         build
-            job: 'Electron XPlatform Pipeline - Downstream',
+            job: "Electron XPlatform Pipeline - Downstream",
             parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
     }
 
