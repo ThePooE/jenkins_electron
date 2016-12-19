@@ -19,8 +19,10 @@ node {
     stage ('Setup') {
         //bat 'npm run package-properties'
         def file = readFile 'package.json'
-        def json = jsonParse(file);
-        def displayName = 'v' + json.version.split("\\.")[0] + env.BUILD_ID  + ' - ' + json.platform
+        def jsonFile = jsonParse(file);
+        def majorRelease = jsonFile.version.split(".")[0]
+        def minorRelease = jsonFile.version.split(".")[1]
+        def displayName = 'v' + majorRelease + '.' + minorRelease + '.' + env.BUILD_ID
         currentBuild.displayName = displayName
         bat 'npm uninstall *'
     }
@@ -34,7 +36,7 @@ node {
     stage ('Downstream') {
         //bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
         build job: 'Electron XPlatform Pipeline - Downstream',
-              parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
+              parameters: [string(name: 'DISPLAY_NAME', value: displayName)]
     }
 
     /** Testing Stage */
