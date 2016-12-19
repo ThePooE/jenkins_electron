@@ -17,8 +17,8 @@ node {
 
     /** Setting-up Stage */
     stage ('Setup') {
-        bat 'npm run package-properties'
-        def file = readFile 'package-properties.json'
+        //bat 'npm run package-properties'
+        def file = readFile 'package.json'
         def json = jsonParse(file);
         currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
         bat 'npm uninstall *'
