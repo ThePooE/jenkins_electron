@@ -32,6 +32,7 @@
     "packMac": "electron-packager . --platform=darwin,mas --ignore=\"/.git(ignore|modules)\"",
     "packLinux": "electron-packager . --platform=linux --ignore=\"/.git(ignore|modules)\"",
     "package-properties": "node \"scripts/package-properties.js\"",
+    "package-properties-legacy": "node \"scripts/package-properties-legacy.js\"",
     "dumpVersion": "node -e console.log(`version=`+(JSON.parse(fs.readFileSync('./package.json'))).version) > version.txt"
   },
   "dependencies": {
