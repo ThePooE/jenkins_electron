@@ -20,7 +20,8 @@ node {
         //bat 'npm run package-properties'
         def file = readFile 'package.json'
         def json = jsonParse(file);
-        currentBuild.displayName = 'v' + json.version + ' - ' + json.platform + env.BUILD_ID
+        def displayName = 'v' + json.version.split("\\.")[0] + env.BUILD_ID  + ' - ' + json.platform
+        currentBuild.displayName = displayName
         bat 'npm uninstall *'
     }
 

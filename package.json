@@ -2,7 +2,7 @@
   "name": "jenkins_electron",
   "productName": "Jenkins_Electron",
   "description": "Testing site for Jenkins CI with Electron",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Nate BW <thepooe@gmail.com>",
   "copyright": "© 2016, Everybody Inc",
   "homepage": "https://github.com/ThePooE/jenkins_electron",
