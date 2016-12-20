@@ -10,16 +10,19 @@ def jsonParse(def json) {
 
 
 node {
-    parallel firstBranch: {
-        stage ('a') {
-            echo "a"
-        }
-    }, secondBranch: {
-        stage ('b') {
-            echo "b"
-        }
-    },
-    failFast: true
+    parallel (
+        "Stream 1": {
+            node {
+                echo "a"
+            }
+        },
+        "Stream 2": {
+            node {
+                echo "b"
+            }
+        },
+        failFast: true
+    )
 
     /** Downloading Stage */
     stage ('Download') {
