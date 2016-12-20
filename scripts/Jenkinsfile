@@ -11,9 +11,13 @@ def jsonParse(def json) {
 
 node {
     parallel firstBranch: {
-        echo "a"
+        stage ('a') {
+            echo "a"
+        }
     }, secondBranch: {
-        echo "b"
+        stage ('b') {
+            echo "b"
+        }
     },
     failFast: true
 
