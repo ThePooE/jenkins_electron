@@ -8,6 +8,7 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
+def mvnHome = tool 'M3'
 
 node {
     parallel (
@@ -27,7 +28,6 @@ node {
     /** Downloading Stage */
     stage ('Download') {
         checkout scm
-        def mvnHome = tool 'M3'
     }
 
     /** Setting-up Stage */
