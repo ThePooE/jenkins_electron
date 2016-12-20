@@ -8,9 +8,8 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def mvnHome = tool 'M3'
-
 node {
+    def mvnHome = tool 'M3'
     parallel (
         "Stream 1": {
             node {
