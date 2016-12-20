@@ -44,7 +44,9 @@ def transformIntoStep(inputString) {
     // that explicitly, or use { -> } syntax.
     return {
         node {
-            echo inputString
+            stage(inputString) {
+                echo inputString
+            }
         }
     }
 }
