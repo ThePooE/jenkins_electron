@@ -8,63 +8,65 @@ def jsonParse(def json) {
     new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-def mvnHome = tool 'M3'
-parallel (
-    "Stream 1": {
-        node {
-            echo "a"
-        }
-    },
-    "Stream 2": {
-        node {
-            echo "b"
-        }
-    },
-    failFast: true
-)
+node {
+    def mvnHome = tool 'M3'
+    parallel (
+        "Stream 1": {
+            node {
+                echo "a"
+            }
+        },
+        "Stream 2": {
+            node {
+                echo "b"
+            }
+        },
+        failFast: true
+    )
 
-/** Downloading Stage */
-stage ('Download') {
-    checkout scm
-}
+    /** Downloading Stage */
+    stage ('Download') {
+        checkout scm
+    }
 
-/** Setting-up Stage */
-stage ('Setup') {
-    //bat 'npm run package-properties'
-    def file = readFile 'package.json'
-    def jsonFile = jsonParse(file);
-    def majorRelease = jsonFile.version.split("\\.")[0]
-    def minorRelease = jsonFile.version.split("\\.")[1]
-    def displayName = 'v' + majorRelease + '.' + minorRelease + '.' + env.BUILD_ID
-    currentBuild.displayName = displayName
-    bat 'npm uninstall *'
-}
+    /** Setting-up Stage */
+    stage ('Setup') {
+        //bat 'npm run package-properties'
+        def file = readFile 'package.json'
+        def jsonFile = jsonParse(file);
+        def majorRelease = jsonFile.version.split("\\.")[0]
+        def minorRelease = jsonFile.version.split("\\.")[1]
+        def displayName = 'v' + majorRelease + '.' + minorRelease + '.' + env.BUILD_ID
+        currentBuild.displayName = displayName
+        bat 'npm uninstall *'
+    }
 
-/** Building Stage */
-stage ('Build') {
-    bat 'npm install'
-}
+    /** Building Stage */
+    stage ('Build') {
+        bat 'npm install'
+    }
 
-/** Downstreaming Stage */
-stage ('Downstream') {
-    //bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
-    build job: 'Electron XPlatform Pipeline - Downstream',
-            parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
-}
+    /** Downstreaming Stage */
+    stage ('Downstream') {
+        //bat "echo DISPLAYNAME=${currentBuild.displayName} > build.properties"
+        build job: 'Electron XPlatform Pipeline - Downstream',
+                parameters: [string(name: 'DISPLAY_NAME', value: currentBuild.displayName)]
+    }
 
-/** Testing Stage */
-stage ('Test') {
-    bat 'npm run e2e'
-    bat 'npm run coverage'
-}
+    /** Testing Stage */
+    stage ('Test') {
+        bat 'npm run e2e'
+        bat 'npm run coverage'
+    }
 
-/** Packaging Stage */
-stage ('Package') {
-    bat 'npm run packWin'
-}
+    /** Packaging Stage */
+    stage ('Package') {
+        bat 'npm run packWin'
+    }
 
-/** Post-build Stage */
-stage ('Post-Build') {
-    archiveArtifacts artifacts: '**', onlyIfSuccessful: true
-    deleteDir()
+    /** Post-build Stage */
+    stage ('Post-Build') {
+        archiveArtifacts artifacts: '**', onlyIfSuccessful: true
+        deleteDir()
+    }
 }
